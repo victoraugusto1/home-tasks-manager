@@ -10,7 +10,7 @@ class TaskRequest(
         val assignee: Long?,
         var cost: Double = 0.0,
         val finishedAt: String?,
-        var createdAt: String,
+        var createdAt: String?,
         val creator: Long,
         var status: String?
 )
