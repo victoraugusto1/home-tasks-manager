@@ -7,6 +7,7 @@ import br.com.hometasksmanager.hometasksmanager.repository.UserRepository
 import br.com.hometasksmanager.hometasksmanager.service.TaskService
 import br.com.hometasksmanager.hometasksmanager.service.UserService
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -22,11 +23,11 @@ class TaskAdapter(
             assignee = userService.getUser(tr.assignee)
         }
 
-        val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
 
         val creator: User = userService.getUser(tr.creator)
 
-        return Task(null, tr.subject, tr.action, LocalDateTime.parse(tr.dueDate, formatter), assignee, tr.cost, LocalDateTime.parse(tr.finishedAt, formatter), LocalDateTime.parse(tr.createdAt, formatter) , creator, tr.status)
+        return Task(null, tr.subject, tr.action, LocalDate.parse(tr.dueDate, formatter), assignee, tr.cost, LocalDate.parse(tr.finishedAt, formatter), LocalDate.parse(tr.createdAt, formatter) , creator, tr.status)
     }
 }
