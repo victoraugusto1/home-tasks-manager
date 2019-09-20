@@ -1,7 +1,6 @@
 package br.com.hometasksmanager.hometasksmanager.api.controllers.dto
 
 import java.time.LocalDateTime
-import java.util.*
 
 class TaskRequest(
         var id: Int?,
