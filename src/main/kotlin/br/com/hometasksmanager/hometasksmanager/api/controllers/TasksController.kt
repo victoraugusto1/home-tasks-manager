@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 import java.lang.RuntimeException
 
 @RestController
+@CrossOrigin( origins = ["*"])
 @RequestMapping("/tasks")
 class TasksController (var taskService: TaskService,
                        var taskAdapter: TaskAdapter) {

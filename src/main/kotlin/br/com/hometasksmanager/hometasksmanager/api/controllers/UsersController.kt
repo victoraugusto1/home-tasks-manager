@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@CrossOrigin( origins = ["*"])
 @RequestMapping("/users")
 class UsersController (var userService: UserService) {
     @PostMapping
