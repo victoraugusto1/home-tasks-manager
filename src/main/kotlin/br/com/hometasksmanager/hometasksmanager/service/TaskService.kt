@@ -14,4 +14,6 @@ interface TaskService {
 
     @Throws(RuntimeException::class)
     fun updateTask(taskId: Long, task: Task): Task
+
+    fun getNextId(): Long
 }

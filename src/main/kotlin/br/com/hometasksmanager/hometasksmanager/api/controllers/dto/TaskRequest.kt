@@ -1,13 +1,17 @@
 package br.com.hometasksmanager.hometasksmanager.api.controllers.dto
 
+import java.time.LocalDateTime
+import java.util.*
+
 class TaskRequest(
         var id: Int?,
         val subject: String,
         val action: String,
-        val dueDate: String?,
+        val dueDate: LocalDateTime?,
         val assignee: Long?,
-        var cost: Int = 0,
-        val creator: String,
-        var status: String?,
-        var createdAt: String?
+        var cost: Double = 0.0,
+        val finishedAt: LocalDateTime?,
+        var createdAt: LocalDateTime,
+        val creator: Long,
+        var status: String?
 )

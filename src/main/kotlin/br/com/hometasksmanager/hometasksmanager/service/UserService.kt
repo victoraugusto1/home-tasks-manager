@@ -4,7 +4,6 @@ import br.com.hometasksmanager.hometasksmanager.domain.User
 import java.lang.RuntimeException
 
 interface UserService {
-
     fun getUsers(): List<User>
 
     @Throws(RuntimeException::class)
@@ -14,4 +13,6 @@ interface UserService {
 
     @Throws(RuntimeException::class)
     fun updateUser(userId: Long, user: User): User
+
+    fun getNextId(): Long
 }

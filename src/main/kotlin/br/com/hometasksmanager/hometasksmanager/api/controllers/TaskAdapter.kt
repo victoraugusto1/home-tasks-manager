@@ -2,15 +2,27 @@ package br.com.hometasksmanager.hometasksmanager.api.controllers
 
 import br.com.hometasksmanager.hometasksmanager.api.controllers.dto.TaskRequest
 import br.com.hometasksmanager.hometasksmanager.domain.Task
+import br.com.hometasksmanager.hometasksmanager.domain.User
 import br.com.hometasksmanager.hometasksmanager.repository.UserRepository
+import br.com.hometasksmanager.hometasksmanager.service.TaskService
+import br.com.hometasksmanager.hometasksmanager.service.UserService
+import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
-class TaskAdapter() {
+@Component
+class TaskAdapter(
+        var userService: UserService
+) {
 
-    lateinit var userRepository: UserRepository
+    fun toDomain(tr: TaskRequest): Task {
+        var assignee: User? = null
 
-    fun toDomain(taskRequest: TaskRequest){
-        val assigneeUser = if (taskRequest.assignee != null) userRepository.findById(taskRequest.assignee) else null
-        Task(null, taskRequest.subject, taskRequest.action, LocalDateTime.parse(taskRequest.dueDate), assigneeUser, )
+        if (null != tr.assignee) {
+            assignee = userService.getUser(tr.assignee)
+        }
+
+        val creator: User = userService.getUser(tr.creator)
+
+        return Task(null, tr.subject, tr.action, tr.dueDate, assignee, tr.cost, tr.finishedAt, tr.createdAt, creator, tr.status)
     }
 }

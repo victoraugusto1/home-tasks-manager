@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service
 import java.lang.RuntimeException
 
 @Service
-class UserServiceImpl (
-    val repository: UserRepository
-) : UserService {
-
+class UserServiceImpl (val repository: UserRepository) : UserService {
     override
     fun getUsers(): List<User> {
         return repository.findAll()
@@ -29,5 +26,9 @@ class UserServiceImpl (
     fun updateUser(userId: Long, user: User): User {
         val myUser: User = repository.findById(userId).orElseThrow { RuntimeException() }
         return repository.save(user.copy( id = myUser.id ))
+    }
+
+    override fun getNextId(): Long {
+        return (getUsers().count() + 1).toLong()
     }
 }

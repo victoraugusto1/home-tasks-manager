@@ -8,17 +8,16 @@ import java.util.*
 
 @Document(collection = "tasks")
 data class Task (
-
         @Id
-        val id: Long? = 0L,
+        var id: Long? = 0L,
 
         val subject: String = "",
         val action: String = "",
         val dueDate: LocalDateTime? = null,
         val assignee: User? = null,
         val cost: Double = 0.0,
-        val finishedAt: Date? = null,
+        val finishedAt: LocalDateTime? = null,
         val createdAt: LocalDateTime = LocalDateTime.now(),
         val creator: User? = null,
-        val status: String = "pending"
+        val status: String? = "pending"
 )
