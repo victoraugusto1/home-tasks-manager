@@ -10,7 +10,7 @@ import java.util.*
 data class Task (
 
         @Id
-        val id: Long = 0L,
+        val id: Long? = 0L,
 
         val subject: String = "",
         val action: String = "",
