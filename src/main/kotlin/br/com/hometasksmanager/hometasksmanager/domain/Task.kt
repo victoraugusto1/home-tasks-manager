@@ -18,7 +18,7 @@ data class Task (
         val assignee: User? = null,
         val cost: Double = 0.0,
         val finishedAt: LocalDate? = null,
-        val createdAt: LocalDate = LocalDate.now(),
+        val createdAt: LocalDate? = LocalDate.now(),
         val creator: User? = null,
         val status: String? = "pending"
 )

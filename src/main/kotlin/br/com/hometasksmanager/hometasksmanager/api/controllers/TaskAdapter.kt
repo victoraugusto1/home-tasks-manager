@@ -19,6 +19,9 @@ class TaskAdapter(
     fun toDomain(tr: TaskRequest): Task {
         var assignee: User? = null
         var creator: User? = null
+        var dueDate: LocalDate? = null
+        var finishedAt: LocalDate? = null
+        var createdAt: LocalDate? = null
 
         if (null != tr.assignee) {
             assignee = userService.getUser(tr.assignee)
@@ -30,6 +33,19 @@ class TaskAdapter(
             creator = userService.getUser(tr.creator)
         }
 
-        return Task(null, tr.subject, tr.action, LocalDate.parse(tr.dueDate, formatter), assignee, tr.cost, LocalDate.parse(tr.finishedAt, formatter), LocalDate.parse(tr.createdAt, formatter) , creator, tr.status)
+        if (tr.dueDate != null) {
+            dueDate = LocalDate.parse(tr.dueDate, formatter)
+        }
+
+        if (tr.finishedAt != null) {
+            finishedAt = LocalDate.parse(tr.finishedAt, formatter)
+        }
+
+        if (tr.createdAt != null) {
+            createdAt = LocalDate.parse(tr.createdAt, formatter)
+        }
+
+
+        return Task(null, tr.subject, tr.action, dueDate, assignee, tr.cost, finishedAt, createdAt, creator, tr.status)
     }
 }
