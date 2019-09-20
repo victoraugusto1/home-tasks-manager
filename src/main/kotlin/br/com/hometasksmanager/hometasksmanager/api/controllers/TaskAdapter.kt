@@ -18,15 +18,17 @@ class TaskAdapter(
 
     fun toDomain(tr: TaskRequest): Task {
         var assignee: User? = null
+        var creator: User? = null
 
         if (null != tr.assignee) {
             assignee = userService.getUser(tr.assignee)
         }
 
-        val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
-
-        val creator: User = userService.getUser(tr.creator)
+        if (null != tr.creator) {
+            creator = userService.getUser(tr.creator)
+        }
 
         return Task(null, tr.subject, tr.action, LocalDate.parse(tr.dueDate, formatter), assignee, tr.cost, LocalDate.parse(tr.finishedAt, formatter), LocalDate.parse(tr.createdAt, formatter) , creator, tr.status)
     }
