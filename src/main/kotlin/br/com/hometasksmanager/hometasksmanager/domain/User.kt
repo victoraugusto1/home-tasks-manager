@@ -5,8 +5,8 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "users")
 data class User(
-        val name: String,
-
         @Id
-        val id: Long
+        val id: Long = 0L,
+
+        val name: String = ""
 )
