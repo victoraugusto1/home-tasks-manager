@@ -1,0 +1,17 @@
+version: '2'
+services:
+  api:
+    build: .
+    container_name: home-tasks-manager-api
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb:mongodb
+  mongodb:
+    image: mongo:3.2
+    container_name: tasks-mongodb
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+    environment:
+      AUTH: "no"
