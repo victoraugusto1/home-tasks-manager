@@ -23,11 +23,11 @@ class TaskAdapter(
         var finishedAt: LocalDate? = null
         var createdAt: LocalDate? = null
 
+        val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
         if (null != tr.assignee) {
             assignee = userService.getUser(tr.assignee)
         }
-
-        val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
         if (null != tr.creator) {
             creator = userService.getUser(tr.creator)
@@ -47,5 +47,37 @@ class TaskAdapter(
 
 
         return Task(null, tr.subject, tr.action, dueDate, assignee, tr.cost, finishedAt, createdAt, creator, tr.status)
+    }
+
+    fun fromDomain(t: Task): TaskRequest {
+        var assignee: Long? = null
+        var creator: Long? = null
+        var dueDate: String? = null
+        var finishedAt: String? = null
+        var createdAt: String? = null
+
+        val formatter : DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
+        if (null != t.assignee) {
+            assignee = t.assignee.id
+        }
+
+        if (null != t.creator) {
+            creator = t.creator.id
+        }
+
+        if (t.dueDate != null) {
+            dueDate = formatter.format(t.dueDate)
+        }
+
+        if (t.finishedAt != null) {
+            finishedAt = formatter.format(t.finishedAt)
+        }
+
+        if (t.createdAt != null) {
+            createdAt = formatter.format(t.createdAt)
+        }
+
+        return TaskRequest(null, t.subject, t.action, dueDate, assignee, t.cost, finishedAt, createdAt, creator, t.status)
     }
 }
